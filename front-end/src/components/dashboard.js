@@ -27,6 +27,7 @@ const Dashboard = () => {
     return (
         <div>
             <h1>Dashboard</h1>
+            <button onClick={logout}>Logout</button>
             {data && (
                 <div>
                     <h2>Welcome, {data.name}</h2>
@@ -34,7 +35,6 @@ const Dashboard = () => {
                     <EmployeeManagement />
                 </div>
             )}
-            <button onClick={logout}>Logout</button>
         </div>
     );
 };

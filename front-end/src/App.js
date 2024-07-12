@@ -6,6 +6,8 @@ import { AuthContext } from './contexts/authContext';
 import Dashboard from './components/dashboard';
 import NoMatch from './components/noMatch.js';
 import Login from './components/Login.js';
+import './App.css';
+
 
 function App() {
   const { user } = useContext(AuthContext);

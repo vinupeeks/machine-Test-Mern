@@ -76,7 +76,7 @@ const EmployeeManagement = () => {
                 <input type="text" placeholder="Phone" value={phone} onChange={(e) => setPhone(e.target.value)} required />
                 <button type="submit">{editingEmployeeId ? 'Update Employee' : 'Add Employee'}</button>
             </form>
-            <ul>
+            <ul style={{listStyle:'none'}}>
                 {employees.map((employee) => (
                     <div key={employee._id}>
                         <li>{employee.name} - {employee.email} - {employee.phone}</li>
