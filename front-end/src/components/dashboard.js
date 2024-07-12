@@ -25,7 +25,7 @@ const Dashboard = () => {
     }, []);
 
     return (
-        <div>
+        <div className="container">
             <h1>Dashboard</h1>
             <button onClick={logout}>Logout</button>
             {data && (
