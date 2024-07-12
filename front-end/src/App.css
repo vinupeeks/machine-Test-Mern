@@ -8,6 +8,7 @@
   border-radius: 5px;
   padding: 20px;
   margin: 20px;
+  width: 500px;
   background-color: rgb(173, 188, 120); /* Optional background color */
   box-shadow: 0 2px 5px rgba(150, 173, 98, 0.1); /* Optional shadow */
 }
