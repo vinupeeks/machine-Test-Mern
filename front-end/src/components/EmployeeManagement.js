@@ -10,6 +10,7 @@ const EmployeeManagement = () => {
     const [editingEmployeeId, setEditingEmployeeId] = useState(null);
     const [viewData, setViewData] = useState(false);
     const [vData, setVData] = useState('');
+    const [searchTerm, setSearchTerm] = useState('');
 
     // const { user } = useContext(AuthContext);
 
@@ -75,23 +76,35 @@ const EmployeeManagement = () => {
     const handleClose = () => {
         setVData('');
     }
+    const handleSearch = (e) => {
+        setSearchTerm(e.target.value);
+    };
+    const filteredEmployees = employees.filter(employee =>
+        employee.name.toLowerCase().includes(searchTerm.toLowerCase())
+    );
     return (
         <div>
             <h1>Your Employees</h1>
             <form onSubmit={handleSubmit}>
+                <input
+                    type="text"
+                    placeholder="Search by name..."
+                    value={searchTerm}
+                    onChange={handleSearch}
+                />
+                <h4>Enter Details</h4>
                 <input type="text" placeholder="Name" value={name} onChange={(e) => setName(e.target.value)} required />
                 <input type="email" placeholder="Email" value={email} onChange={(e) => setEmail(e.target.value)} required />
                 <input type="text" placeholder="Phone" value={phone} onChange={(e) => setPhone(e.target.value)} required />
                 <button type="submit">{editingEmployeeId ? 'Update Employee' : 'Add Employee'}</button>
             </form>
             <ul style={{ listStyle: 'none' }}>
-                {employees.map((employee) => (
+                {filteredEmployees.map((employee) => (
                     <div key={employee._id}>
                         <li>{employee.name} - {employee.email} - {employee.phone}</li>
                         <button onClick={() => handleEdit(employee)}>Edit</button>
                         <button onClick={(e) => handleDelete(employee, e)}>Delete</button>
                         <button onClick={(e) => handleView(employee, e)}>View</button>
-                        {/* {console.log(employee)} */}
                     </div>
                 ))}
             </ul>
