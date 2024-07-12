@@ -8,6 +8,9 @@ const EmployeeManagement = () => {
     const [email, setEmail] = useState('');
     const [phone, setPhone] = useState('');
     const [editingEmployeeId, setEditingEmployeeId] = useState(null);
+    const [viewData, setViewData] = useState(false);
+    const [vData, setVData] = useState('');
+
     // const { user } = useContext(AuthContext);
 
     const fetchEmployees = async () => {
@@ -66,7 +69,12 @@ const EmployeeManagement = () => {
     useEffect(() => {
         fetchEmployees();
     }, []);
-
+    const handleView = (employee, e) => {
+        setVData(employee);
+    }
+    const handleClose = () => {
+        setVData('');
+    }
     return (
         <div>
             <h1>Your Employees</h1>
@@ -76,16 +84,26 @@ const EmployeeManagement = () => {
                 <input type="text" placeholder="Phone" value={phone} onChange={(e) => setPhone(e.target.value)} required />
                 <button type="submit">{editingEmployeeId ? 'Update Employee' : 'Add Employee'}</button>
             </form>
-            <ul style={{listStyle:'none'}}>
+            <ul style={{ listStyle: 'none' }}>
                 {employees.map((employee) => (
                     <div key={employee._id}>
                         <li>{employee.name} - {employee.email} - {employee.phone}</li>
                         <button onClick={() => handleEdit(employee)}>Edit</button>
                         <button onClick={(e) => handleDelete(employee, e)}>Delete</button>
+                        <button onClick={(e) => handleView(employee, e)}>View</button>
                         {/* {console.log(employee)} */}
                     </div>
                 ))}
             </ul>
+            {vData && (
+                <div>
+                    <h2>EMPLOYEE Details</h2>
+                    <span>Name:{vData.name} </span>
+                    <span>Email:{vData.email} </span>
+                    <span>Ph-Num:{vData.phone} </span>
+                    <button onClick={handleClose}> CLOSE </button>
+                </div>
+            )}
         </div>
     );
 };
